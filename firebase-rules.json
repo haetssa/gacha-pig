@@ -1,0 +1,31 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "presence": {
+      ".read": true,
+      "$uid": {
+        ".write": true,
+        ".validate": "$uid.length < 40"
+      }
+    },
+    "lobby": {
+      ".read": true,
+      "$room": {
+        ".write": true,
+        ".validate": "!newData.exists() || (newData.child('name').isString() && newData.child('name').val().length <= 30)"
+      }
+    },
+    "rooms": {
+      "$room": {
+        ".read": true,
+        ".write": true,
+        "players": {
+          "$uid": {
+            ".validate": "!newData.exists() || (newData.child('name').isString() && newData.child('name').val().length <= 20)"
+          }
+        }
+      }
+    }
+  }
+}

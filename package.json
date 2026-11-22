@@ -1,0 +1,1 @@
+{"name":"gacha-pig-bombfight","private":true,"version":"0.1.0","type":"module","scripts":{"dev":"vite --host","build":"vite build","preview":"vite preview --host"},"devDependencies":{"gh-pages":"^6.3.0","vite":"^8.3.8"}}

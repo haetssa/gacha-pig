@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>맵 에디터 · 가챠 피그 봄파이트</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/editor.css">
+</head>
+<body>
+  <header>
+    <b>맵 에디터</b>
+    <select id="map-list"></select>
+    <button id="btn-load">불러오기</button>
+    <button id="btn-new">새 맵</button>
+    <span class="grow"></span>
+    <span id="status"></span>
+    <button id="btn-save" class="primary">저장</button>
+    <button id="btn-test" class="primary">저장하고 테스트</button>
+  </header>
+  <main>
+    <aside>
+      <h3>칸 종류</h3>
+      <div id="palette"></div>
+      <p class="tip">왼쪽 클릭·드래그: 칠하기 / 오른쪽 클릭: 지우기(빈 칸)</p>
+
+      <h3>대칭</h3>
+      <div id="sym" class="radios">
+        <label><input type="radio" name="sym" value="none" checked> 없음</label>
+        <label><input type="radio" name="sym" value="lr"> 좌우</label>
+        <label><input type="radio" name="sym" value="ud"> 상하</label>
+        <label><input type="radio" name="sym" value="both"> 4방향</label>
+        <label><input type="radio" name="sym" value="rot"> 180° 회전</label>
+      </div>
+
+      <h3>빠른 작업</h3>
+      <div class="btnrow">
+        <button id="fx-border">테두리 벽</button>
+        <button id="fx-pillars">기둥 격자</button>
+        <button id="fx-fill">빈 곳을 ?로</button>
+        <button id="fx-spawns">시작위치 모서리</button>
+        <button id="fx-clear">전부 지우기</button>
+      </div>
+    </aside>
+
+    <section id="board-wrap"><canvas id="board"></canvas></section>
+
+    <aside>
+      <h3>맵 설정</h3>
+      <label>파일 이름 <input id="f-id" placeholder="영문/숫자/_ 만"></label>
+      <label>표시 이름 <input id="f-name"></label>
+      <label>테마 <select id="f-theme"></select></label>
+      <div class="two">
+        <label>가로(칸) <input id="f-cols" type="number" min="5" max="19"></label>
+        <label>세로(칸) <input id="f-rows" type="number" min="5" max="21"></label>
+      </div>
+      <button id="btn-resize">크기 적용</button>
+      <label>랜덤 블록(?) 채움 <input id="f-fill" type="range" min="0" max="1" step="0.05"> <small id="v-fill"></small></label>
+      <label>블록에서 아이템 확률 <input id="f-item" type="range" min="0" max="1" step="0.05"> <small id="v-item"></small></label>
+      <label>제한 시간(초) <input id="f-time" type="number" min="30" max="600" step="10"></label>
+
+      <h3>검사</h3>
+      <ul id="checks"></ul>
+      <div id="counts"></div>
+    </aside>
+  </main>
+  <script type="module" src="./src/editor.js"></script>
+</body>
+</html>
