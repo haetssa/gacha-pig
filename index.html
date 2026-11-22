@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#1d1a2b">
+  <title>가챠 피그 봄파이트</title>
+  <meta property="og:title" content="가챠 피그 봄파이트">
+  <meta property="og:description" content="돼지들의 폭탄 대결! 가챠로 뽑은 특성으로 친구들과 한 판">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="./assets/index-7Dr5oYnN.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B_6fynn7.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 타이틀 -->
+    <section id="scr-title" class="screen active">
+      <button class="music-btn corner" title="배경음악">🔊</button>
+      <div class="spacer"></div>
+      <h1 class="logo"><span>가챠 피그</span><b>봄파이트</b></h1>
+      <div id="title-pigs" class="pig-row"></div>
+      <div class="spacer"></div>
+      <div class="info-btns">
+        <button class="btn ghost" data-info="pigs">돼지 소개</button>
+        <button class="btn ghost" data-info="perks">가챠 목록</button>
+        <button class="btn ghost" data-info="items">아이템</button>
+      </div>
+      <button id="btn-online" class="btn big">온라인 대결</button>
+      <button id="btn-start" class="btn big alt">혼자 하기 (봇 3마리)</button>
+      <p id="title-msg" class="hint"></p>
+    </section>
+
+    <!-- 도감 -->
+    <section id="scr-info" class="screen">
+      <div id="info-tabs" class="tabs">
+        <button data-tab="pigs">돼지</button><button data-tab="perks">가챠</button><button data-tab="items">아이템</button>
+      </div>
+      <div id="info-body"></div>
+      <button id="btn-info-back" class="btn big">돌아가기</button>
+    </section>
+
+    <!-- 혼자 하기: 돼지 선택 -->
+    <section id="scr-select" class="screen">
+      <h2>돼지를 고르세요</h2>
+      <div id="pig-cards" class="cards"></div>
+      <button id="btn-to-gacha" class="btn big" disabled>가챠 돌리기</button>
+      <button id="btn-select-back" class="btn ghost">돌아가기</button>
+    </section>
+
+    <!-- 온라인: 닉네임 -->
+    <section id="scr-online" class="screen">
+      <div class="spacer"></div>
+      <h2>온라인 대결</h2>
+      <label class="field">닉네임 <input id="nick" maxlength="10" placeholder="최대 10글자" autocomplete="off"></label>
+      <button id="btn-online-enter" class="btn big">입장하기</button>
+      <p id="online-msg" class="hint"></p>
+      <div class="spacer"></div>
+      <button id="btn-online-back" class="btn ghost">돌아가기</button>
+    </section>
+
+    <!-- 온라인: 로비 (방 목록) -->
+    <section id="scr-lobby" class="screen">
+      <div class="topbar"><h2>방 목록</h2><span id="lobby-count" class="hint"></span></div>
+      <div id="room-list" class="scroll"></div>
+      <p id="lobby-msg" class="hint warn"></p>
+      <div id="create-panel" class="panel hidden">
+        <label class="field">방 이름 <input id="room-name" maxlength="20" autocomplete="off"></label>
+        <label class="field">비밀번호 (비우면 공개 방) <input id="room-pw" maxlength="10" autocomplete="off"></label>
+        <label class="field">맵 <select id="room-map"></select></label>
+        <div class="row2"><button id="btn-create-ok" class="btn">만들기</button><button id="btn-create-cancel" class="btn ghost">취소</button></div>
+      </div>
+      <button id="btn-create-room" class="btn big">방 만들기</button>
+      <button id="btn-lobby-back" class="btn ghost">나가기</button>
+    </section>
+
+    <!-- 온라인: 방 (대기실) -->
+    <section id="scr-room" class="screen">
+      <div class="topbar"><h2 id="room-title"></h2><span id="room-map-label" class="hint"></span></div>
+      <div id="room-slots"></div>
+      <div id="room-pigs" class="pig-pick"></div>
+      <div id="room-host" class="host-opts hidden">
+        <label>맵 <select id="room-map-select"></select></label>
+        <label class="chk"><input id="room-bots" type="checkbox"> 빈자리 봇으로 채우기</label>
+      </div>
+      <p id="room-msg" class="hint"></p>
+      <button id="btn-room-main" class="btn big">준비</button>
+      <button id="btn-room-leave" class="btn ghost">방 나가기</button>
+    </section>
+
+    <!-- 게임 -->
+    <section id="scr-game" class="screen">
+      <div id="hud">
+        <div id="timer">2:30</div>
+        <div id="hud-players"></div>
+        <button class="music-btn" title="배경음악">🔊</button>
+      </div>
+      <div id="stage">
+        <canvas id="cv"></canvas>
+        <div id="toast"></div>
+        <div id="gacha-overlay" class="hidden">
+          <h2>특성 가챠!</h2>
+          <div id="gacha-rows"></div>
+        </div>
+      </div>
+      <div id="mystats"></div>
+      <div id="controls">
+        <div id="joy"><div id="dpad"><div class="arm up"></div><div class="arm down"></div><div class="arm left"></div><div class="arm right"></div><div class="hub"></div></div></div>
+        <div id="btns">
+          <button id="btn-skill" class="ctl"><span id="skill-name">스킬</span><em class="key">K</em><i id="skill-cd"></i></button>
+          <button id="btn-bomb" class="ctl">폭탄<em class="key">Space</em></button>
+        </div>
+      </div>
+      <div id="result" class="overlay hidden">
+        <div class="panel">
+          <h2 id="result-title"></h2>
+          <p id="result-sub"></p>
+          <button id="btn-again" class="btn">다시 하기 (가챠부터)</button>
+          <button id="btn-change" class="btn ghost">돼지 바꾸기</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+ "floor": [
+  "floor0.png",
+  "floor1.png",
+  "floor2.png"
+ ],
+ "hard": [
+  "hard0.png",
+  "hard1.png"
+ ],
+ "soft": [
+  "soft0.png",
+  "soft1.png",
+  "soft2.png"
+ ],
+ "crate": [
+  "crate0.png"
+ ],
+ "border": [
+  "border0.png",
+  "border1.png"
+ ]
+}
